@@ -5,7 +5,10 @@ const Calculator = () => {
     const [result, setResult] = useState("");
 
     // TASK 3.1: Add functionality to the handleClick function. It should append the newly clicked value to the previous value.
-    const handleClick = (value) => {};
+    const handleClick = (value) => {
+        setInput((prev) => prev + value);
+    };
+
 
     const handleClear = () => {
         setInput("");
@@ -16,7 +19,7 @@ const Calculator = () => {
     const Evaluate = (input) => {
         if (input) {
             try {
-                // Compute the result
+                setResult(eval(input));
             } catch {
                 setResult("Error");
             }
@@ -26,8 +29,8 @@ const Calculator = () => {
     };
 
     useEffect(() => {
-        // TASK 3.3: Update the result state whenever the input state changes.
-    }, []);
+        Evaluate(input);
+    }, [input]);
 
     return (
         <div className="page-bg calculator">

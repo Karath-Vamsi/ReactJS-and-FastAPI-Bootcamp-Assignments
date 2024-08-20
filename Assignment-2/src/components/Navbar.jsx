@@ -8,7 +8,7 @@ const Navbar = () => {
             <div className="logo-container">
                 <img src={Logo} alt="COSC" />
                 {/* TASK 1: Add your Roll Number */}
-                <h2>Roll No. </h2>
+                <h2>Roll No. 160122771047</h2>
             </div>
             <nav>
                 <ul className="nav">
@@ -23,6 +23,11 @@ const Navbar = () => {
                         </Link>
                     </li>
                     {/* TASK 2.2: Add link for Temperature converter component */}
+                    <li>
+                        <Link to="/temperature-converter" className="nav-link">
+                            Converter
+                        </Link>
+                    </li>
                 </ul>
             </nav>
         </header>

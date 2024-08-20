@@ -15,6 +15,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/calculator" element={<Calculator />} />
                 {/* TASK 2.1: Add a route for TemperatureConverter Page */}
+                <Route path="/temperature-converter" element={<TemperatureConverter />} />
             </Routes>
         </Router>
     );

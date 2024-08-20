@@ -16,22 +16,39 @@ const TemperatureConverter = () => {
         }
 
         let convertedTemp;
-        if (inputUnit === "Celsius" && outputUnit === "Fahrenheit") {
-        } else if (inputUnit === "Celsius" && outputUnit === "Kelvin") {
-        } else if (inputUnit === "Fahrenheit" && outputUnit === "Celsius") {
-        } else if (inputUnit === "Fahrenheit" && outputUnit === "Kelvin") {
-        } else if (inputUnit === "Kelvin" && outputUnit === "Celsius") {
-        } else if (inputUnit === "Kelvin" && outputUnit === "Fahrenheit") {
-        } else {
-            convertedTemp = temp; // Same unit conversion
+        if (inputUnit === "Celsius") {
+            if (outputUnit === "Fahrenheit") {
+                convertedTemp = (temp * 9) / 5 + 32;
+            } else if (outputUnit === "Kelvin") {
+                convertedTemp = temp + 273.15;
+            } else {
+                convertedTemp = temp;
+            }
+        } else if (inputUnit === "Fahrenheit") {
+            if (outputUnit === "Celsius") {
+                convertedTemp = (temp - 32) * 5 / 9;
+            } else if (outputUnit === "Kelvin") {
+                convertedTemp = (temp - 32) * 5 / 9 + 273.15;
+            } else {
+                convertedTemp = temp;
+            }
+        } else if (inputUnit === "Kelvin") {
+            if (outputUnit === "Celsius") {
+                convertedTemp = temp - 273.15;
+            } else if (outputUnit === "Fahrenheit") {
+                convertedTemp = (temp - 273.15) * 9 / 5 + 32;
+            } else {
+                convertedTemp = temp;
+            }
+
         }
 
         setOutputTemp(convertedTemp.toFixed(2));
     };
 
     useEffect(() => {
-        // TASK 4.5: Update the converted temperature automatically whenever inputTemp or inputUnit or outputUnit changes.
-    }, []);
+        convertTemperature();
+    }, [inputTemp, inputUnit, outputUnit]);
 
     return (
         <div className="page-bg converter">
@@ -55,6 +72,14 @@ const TemperatureConverter = () => {
                 </div>
                 <div className="output-section">
                     {/* TASK 4.1: Create a select component for outputUnit similar to the inputUnit select component. */}
+                    <select
+                        value={outputUnit}
+                        onChange={(e) => setOutputUnit(e.target.value)}
+                    >
+                        <option value="Celsius">Celsius</option>
+                        <option value="Fahrenheit">Fahrenheit</option>
+                        <option value="Kelvin">Kelvin</option>
+                    </select>
                     <input
                         type="text"
                         value={outputTemp}
@@ -63,7 +88,7 @@ const TemperatureConverter = () => {
                     />
                 </div>
                 {/* TASK 4.4: Pass outputUnit as a prop to TempConvertButton */}
-                <TempConvertButton convertTemperature={convertTemperature} />
+                <TempConvertButton convertTemperature={convertTemperature} outputUnit={outputUnit} />
             </div>
         </div>
     );
